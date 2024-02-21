@@ -5,19 +5,36 @@
     <div class="row">
         <div class="col">
             <h1>Empréstimos</h1>
+
+            <div class="col-auto">
+                <a class="btn btn-success mx-2" asp-controller="Emprestimo" asp-action="Exportar">
+                    <i class="bi bi-box-arrow-left"></i>
+                    Exportar
+                </a>
+                <a class="btn btn-success mx-2" asp-controller="Emprestimo" asp-action="Cadastrar">
+                    <i class="bi bi-patch-plus-fill mx-1"></i>
+                    Cadastrar novo empréstimo
+                </a>
+            </div>
+
         </div>
-        <div class="col-auto">
-            <a class="btn btn-success mx-2" asp-controller="Emprestimo" asp-action="Cadastrar">cadastrar novo empréstimo</a>
-        </div>
+        
     </div>
 
-    <table class="table table-hover">
+    @if (TempData["MensagemSucesso"] is not null)
+    {
+        <div class="alert alert-success text-light" role="alert">
+            @TempData["MensagemSucesso"]
+        </div>
+    }
+
+    <table id="Emprestimos" class="table table-hover">
         <thead>
             <tr>
                 <th scope="col">Recebedor</th>
                 <th scope="col">Fornecedor</th>
                 <th scope="col">Livro</th>
-                <th scope="col">Última Atualização</th>
+                <th scope="col">Data Emprestimo</th>
                 <th></th>
             </tr>
         </thead>
@@ -32,8 +49,13 @@
                         <td>@emprestimo.LivroEmprestado</td>
                         <td>@emprestimo.DataUltimaAtualizacao</td>
                         <th>
-                            <a asp-controller="Emprestimo" asp-action="Editar" asp-route-id="@emprestimo.Id" class="btn btn-warning">Editar</a>
-                            <a asp-controller="Emprestimo" asp-action="Excluir" asp-route-id="@emprestimo.Id" class="btn btn-danger">Excluir</a>
+                            <a asp-controller="Emprestimo" asp-action="Editar" asp-route-id="@emprestimo.Id" class="btn btn-warning mx-2">
+                                <i class="bi bi-pencil-square mx-1"></i>
+                                Editar
+                            </a>
+                            <a asp-controller="Emprestimo" asp-action="Excluir" asp-route-id="@emprestimo.Id" class="btn btn-danger">
+                                <i class="bi bi-x-square mx-1"></i>
+                                Excluir</a>
                         </th>
                     </tr>
                 }            
